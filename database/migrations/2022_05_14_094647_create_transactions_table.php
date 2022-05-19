@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->foreignId('wallet_id')->references('id')->on('wallets')->cascadeOnDelete();
             $table->enum('type', [Transaction::TYPE_DEBIT, Transaction::TYPE_CREDIT]);
-            $table->decimal('value', 9, 2, true);
+            $table->bigInteger('value', false, true);
             $table->enum('reason', [Transaction::REASON_STOCK, Transaction::REASON_REFUND]);
 
             $table->timestamps();

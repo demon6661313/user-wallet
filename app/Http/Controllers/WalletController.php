@@ -15,7 +15,7 @@ class WalletController extends Controller
     public function getBalance(GetBalanceRequest $request)
     {
         $wallet = Wallet::find($request->wallet_id);
-        return response()->json(['balance' => $wallet->balance]);
+        return response()->json(['balance' => $wallet->balance / 100]);
     }
     public function addTransaction(AddTransactionRequest $request)
     {
@@ -28,7 +28,7 @@ class WalletController extends Controller
             $transaction = Transaction::create([
                 'wallet_id' => $wallet->id,
                 'type' => $request->type,
-                'value' => $value,
+                'value' => $value * 100,
                 'reason' => $request->reason,
             ]);
             $wallet->updateBalance($transaction->type, $transaction->value);
